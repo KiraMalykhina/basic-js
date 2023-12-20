@@ -22,9 +22,37 @@ const { NotImplementedError } = require('../extensions/index.js');
  * }
  *
  */
-function getDNSStats(/* domains */) {
+function getDNSStats(/*domains*/) {
   throw new NotImplementedError('Not implemented');
   // remove line with error and write your code here
+  // let sumRu = 0,
+  //     sumYandex = 0,
+  //     sumCode = 0,
+  //     sumMusic = 0;
+  // const ru = 'ru',
+  //       yandex = 'yandex',
+  //       code = 'code',
+  //       music = 'music';
+
+  // function countDomains (sum, domain) {
+  //   domains.forEach((item, i) => {
+  //     if(domains[i].includes(domain)) {
+  //       sum++
+  //     }
+  //     return sum;
+  //   })
+  //   return sum;
+  // }
+  // const ruResolt = countDomains(sumRu, ru);
+  // const yandexResolt = countDomains(sumYandex, yandex);
+  // const codeResolt = countDomains(sumCode, code);
+  // const musicResolt  = countDomains(sumMusic, music);
+  // return {
+  //   ".ru": ruResolt,
+  //   ".ru.yandex": yandexResolt,
+  //   ".ru.yandex.code": codeResolt,
+  //   ".ru.yandex.music": musicResolt
+  // };
 }
 
 module.exports = {
