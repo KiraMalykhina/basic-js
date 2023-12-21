@@ -16,22 +16,30 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function repeater(str, options) {
-  let res = '';
+  let inputString = '' + str;
+  let result = '';
   let arr = [];
-  let additionSeparatorReapeat = '';
-  const lengthAddSeparator = options.additionSeparator.length;
-  const lengthSeparator = options.separator.length;
-  additionSeparatorReapeat = (options.addition + options.additionSeparator).repeat(options.additionRepeatTimes).slice(0, -lengthAddSeparator);
-  arr.push(str, additionSeparatorReapeat, options.separator);
-  res = (arr.join('').repeat(options.repeatTimes)).slice(0, -lengthSeparator);
-  return res;
-}
-// repeater('STRING', { repeatTimes: 3, separator: '**',
-// addition: 'PLUS', additionRepeatTimes: 3, additionSeparator: '00' });
-// console.log(repeater('TESTstr', { separator: 'ds', addition: 'ADD!', additionSeparator: ')))000' }));
-// console.log(repeater('STRING', { repeatTimes: 3, separator: '**',
-// addition: 'PLUS', additionRepeatTimes: 3, additionSeparator: '00' }));
+  let repeatTimes = options.repeatTimes ? options.repeatTimes : 1;
+  let separator = options.separator ? options.separator : '+';
+  let addition = (('' + options.addition) ? ('' + options.addition) : '').replaceAll('undefined', '');
+  let additionRepeatTimes = options.additionRepeatTimes ? options.additionRepeatTimes : 1;
+  let additionSeparator = options.additionSeparator ? options.additionSeparator : '|';
+  let additionSeparatorRepeat = '';
 
+  const lengthAddSeparator = additionSeparator.length;
+  const lengthSeparator = separator.length;
+
+  if (addition !== '') {
+    additionSeparatorRepeat = (addition + additionSeparator).repeat(additionRepeatTimes);
+    additionSeparatorRepeat = lengthAddSeparator === 0 ? additionSeparatorRepeat : additionSeparatorRepeat.slice(0, -lengthAddSeparator);
+  }
+  arr.push(inputString, additionSeparatorRepeat, separator);
+
+  result = arr.join('').repeat(repeatTimes);
+  result = lengthSeparator === 0 ? result : result.slice(0, -lengthSeparator);
+
+  return result;
+}
 module.exports = {
   repeater
 };
