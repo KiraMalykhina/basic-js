@@ -22,37 +22,20 @@ const { NotImplementedError } = require('../extensions/index.js');
  * }
  *
  */
-function getDNSStats(/*domains*/) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-  // let sumRu = 0,
-  //     sumYandex = 0,
-  //     sumCode = 0,
-  //     sumMusic = 0;
-  // const ru = 'ru',
-  //       yandex = 'yandex',
-  //       code = 'code',
-  //       music = 'music';
-
-  // function countDomains (sum, domain) {
-  //   domains.forEach((item, i) => {
-  //     if(domains[i].includes(domain)) {
-  //       sum++
-  //     }
-  //     return sum;
-  //   })
-  //   return sum;
-  // }
-  // const ruResolt = countDomains(sumRu, ru);
-  // const yandexResolt = countDomains(sumYandex, yandex);
-  // const codeResolt = countDomains(sumCode, code);
-  // const musicResolt  = countDomains(sumMusic, music);
-  // return {
-  //   ".ru": ruResolt,
-  //   ".ru.yandex": yandexResolt,
-  //   ".ru.yandex.code": codeResolt,
-  //   ".ru.yandex.music": musicResolt
-  // };
+function getDNSStats(domains) {
+  const domainStats = new Map();
+  domains.forEach(domain => {
+    domain = domain.split('.').reverse().join(".");
+    while (domain !== '') {
+      if (!domainStats.has('.' + domain)) {
+        domainStats.set('.' + domain, 1);
+      } else {
+        domainStats.set('.' + domain, domainStats.get('.' + domain) + 1);
+      }
+      domain = domain.substring(0, domain.lastIndexOf('.'));
+    }
+  });
+  return Object.fromEntries(domainStats);
 }
 
 module.exports = {
